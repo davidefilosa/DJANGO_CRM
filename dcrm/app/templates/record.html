@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if form.errors %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  Your Form Has Errors
+			  {% for field in form %}
+			  	{% if field.errors %}
+			  		{{ field.errors }}
+			  	{% endif %}
+			  {% endfor %}
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endif %}
+
+{% if record %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{record}}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{record.email}}</h6>
+      <h6 class="card-subtitle mb-2 text-body-secondary">{{record.phone}}</h6>
+    <p class="card-text">{{record.address}} {{record.city}} {{record.state}} {{record.zipcode}}</p>
+      <p class="card-text">Created at: {{record.created_at}}</p>
+  </div>
+</div>{% endif %}
+<br/>
+          <a href="{% url 'home' %}"  class="btn btn-primary" role="button">Back</a>
+          <a href="{% url 'edit_record' record.id %}"  class="btn btn-warning" role="button">Edit</a>
+          <a href="{% url 'delete' record.id%}"  class="btn btn-danger " role="button">Delete</a>
+
+
+{% endblock %}
